@@ -1,34 +1,49 @@
 import React from 'react';
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+
+import {Button} from 'react-native-elements';
 
 export interface Props {
-  title: string;
-  isCompelted: boolean;
+  taskTitle: string;
+  isCompleted: boolean;
+  markCompleted: () => void;
+  deleteTask: () => void;
 }
 
-const Task: React.FC<Props> = ({title, isCompelted}) => {
-  const [tasks, setTasks] = React.useState([]);
-
-  const markIsCompleted = (isCompleted: boolean) => {};
-
+const Task: React.FC<Props> = ({
+  taskTitle,
+  isCompleted,
+  markCompleted,
+  deleteTask,
+}) => {
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <Text style={styles.txtContainer}>Tasks</Text>
-      </View>
-    </SafeAreaView>
+    <TouchableOpacity onPress={markCompleted} style={styles.container}>
+      <Text
+        style={[
+          styles.txtContainer,
+          isCompleted ? styles.completedContainer : null,
+        ]}>
+        {taskTitle}
+      </Text>
+      <Button title="Delete" type="outline" onPress={deleteTask} />
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
+    borderBottomColor: '#DDD',
+    borderBottomWidth: 1,
+    padding: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  completedContainer: {
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid',
   },
   txtContainer: {
-    fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 18,
   },
 });
 

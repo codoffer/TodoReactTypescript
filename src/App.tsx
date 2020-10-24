@@ -7,19 +7,10 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import Home from './screens/Home/Home';
 
-import Tasks from './components/Task';
-
-const App: React.FC<any> = () => {
-  return <Tasks />;
+const App = () => {
+  return <Home />;
 };
 
 export default App;
